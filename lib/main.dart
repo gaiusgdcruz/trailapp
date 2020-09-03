@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trailapp/Screens/Showall/showalldetails.dart';
 import 'Screens/Homepage/homepage.dart';
 
 void main() {
@@ -15,6 +16,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      routes: {
+        '/showalldetails': (context)=> ShowAllDetails()
+      },
       home: Homepage(),
     );
   }
