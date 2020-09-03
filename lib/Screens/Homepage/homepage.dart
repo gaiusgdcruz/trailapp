@@ -4,27 +4,29 @@ import 'package:trailapp/Screens/Homepage/widgets/CustomAppBar.dart';
 import 'package:trailapp/Theme/theme.dart';
 
 class Homepage extends StatelessWidget {
+
+  void onPressedEvent (BuildContext context) {
+    Navigator.of(context).pushNamed('/showalldetails');
+  }
   @override
   Widget build(BuildContext context) {
+    var container = Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 60,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          GreyBox(title: "<₹85 Lakhs>",),
+                          GreyBox(title: "For Sale",),
+                          GreyBox(title: "3-4 Beds",),
+                          GreyBox(title: "Bathrooms",),
+                        ],
+                        
+                      ),
+                    );
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Container(
-        width: 110,
-        height: 50,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: Color.fromRGBO(9, 9, 65, 1)
-        ),
-        padding: EdgeInsets.all(10),
-        child: Row(
-          children: [
-          
-            Icon(Icons.place,color: Colors.white),
-            Text("Map View",style: TextStyle(color: Colors.white))
-          ],
-        ),
-        
-      ),
+      floatingActionButton: FloatingActionButton(),
           body: SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal:20),
@@ -51,25 +53,14 @@ class Homepage extends StatelessWidget {
                         Icon(Icons.settings)                     
                       ],
                     ),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 60,
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        children: [
-                          GreyBox(title: "<₹85 Lakhs>",),
-                          GreyBox(title: "For Sale",),
-                          GreyBox(title: "3-4 Beds",),
-                          GreyBox(title: "Bathrooms",),
-                        ],
-                        
-                      ),
-                    ),
+                    container,
                     ListView(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
                       children: [
-                        Product(price: "₹80 Lakhs",place: "Trivandrum",specs: "4 Bed Rooms / 2 Bath Rooms / 1416 Sq ft",imgpath: "assets/img/home1.jpg"),
+                        GestureDetector(
+                          onTap: ()=> onPressedEvent(context),
+                          child: Product(price: "₹80 Lakhs",place: "Trivandrum",specs: "4 Bed Rooms / 2 Bath Rooms / 1416 Sq ft",imgpath: "assets/img/home1.jpg")),
                         Product(price: "₹60 Lakhs",place: "Kazhakuttom",specs: "3 Bed Rooms / 2 Bath Rooms / 1200 Sq ft",imgpath: "assets/img/home2.jpg"),
                         Product(price: "₹35 Lakhs",place: "Attingal",specs: "2 Bed Rooms / 1 Bath Rooms / 960 Sq ft",imgpath: "assets/img/home3.jpg"),
                         
@@ -80,6 +71,33 @@ class Homepage extends StatelessWidget {
               ),
             ),
           ),
+    );
+  }
+}
+
+class FloatingActionButton extends StatelessWidget {
+  const FloatingActionButton({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 110,
+      height: 50,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: Color.fromRGBO(9, 9, 65, 1)
+      ),
+      padding: EdgeInsets.all(10),
+      child: Row(
+        children: [
+        
+          Icon(Icons.place,color: Colors.white),
+          Text("Map View",style: TextStyle(color: Colors.white))
+        ],
+      ),
+      
     );
   }
 }
@@ -105,7 +123,7 @@ class Product extends StatelessWidget {
               child: Image.asset(imgpath),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical:10.0),
+                padding: const EdgeInsets.symmetric(vertical:15.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [                                  
