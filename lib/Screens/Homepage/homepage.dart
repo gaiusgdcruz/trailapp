@@ -1,13 +1,37 @@
 
 import 'package:flutter/material.dart';
 import 'package:trailapp/Screens/Homepage/widgets/CustomAppBar.dart';
+import 'package:trailapp/Screens/Showall/showalldetails.dart';
 import 'package:trailapp/Theme/theme.dart';
+import 'package:trailapp/models/homeDataModels.dart';
 
+// ignore: must_be_immutable
 class Homepage extends StatelessWidget {
 
   void onPressedEvent (BuildContext context) {
     Navigator.of(context).pushNamed('/showalldetails');
   }
+
+  List<HomeDataModel> houseData = [
+    HomeDataModel(
+      place: 'Trivandrum',
+      price: 80,
+      bathroom: 2,
+      bedroom: 4 ,
+      sqft: 1416,
+      imgpath: 'assets/img/home1.jpg'
+
+    ),
+    HomeDataModel(
+      place: 'Trivandrum',
+      price: 80,
+      bathroom: 2,
+      bedroom: 4 ,
+      sqft: 1416,
+      imgpath: 'assets/img/home1.jpg'
+
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     var container = Container(
@@ -53,19 +77,29 @@ class Homepage extends StatelessWidget {
                         Icon(Icons.settings)                     
                       ],
                     ),
-                    container,
-                    ListView(
+                    ListView.builder(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
-                      children: [
-                        GestureDetector(
-                          onTap: ()=> onPressedEvent(context),
-                          child: Product(price: "₹80 Lakhs",place: "Trivandrum",specs: "4 Bed Rooms / 2 Bath Rooms / 1416 Sq ft",imgpath: "assets/img/home1.jpg")),
-                        Product(price: "₹60 Lakhs",place: "Kazhakuttom",specs: "3 Bed Rooms / 2 Bath Rooms / 1200 Sq ft",imgpath: "assets/img/home2.jpg"),
-                        Product(price: "₹35 Lakhs",place: "Attingal",specs: "2 Bed Rooms / 1 Bath Rooms / 960 Sq ft",imgpath: "assets/img/home3.jpg"),
-                        
-                      ],
-                    )  
+                      itemCount: houseData.length,
+                      itemBuilder: (BuildContext context, int index){
+                        return GestureDetector(
+                          onTap: () {
+                            Map argumnts = {
+                              'place' : houseData[index].place,
+                              'price' : houseData[index].price,
+                            };
+                            print(argumnts);
+                            Navigator.of(context).pushNamed(ShowAllDetails.routeName, arguments: argumnts);
+                          },
+                          child: Product(
+                            price: houseData[0].price.toString()+'Lakhs',
+                            place: houseData[0].place ,
+                            specs: "4 Bed Rooms / 2 Bath Rooms / 1416 Sq ft",
+                            imgpath: houseData[0].imgpath)
+                            );
+                      },
+                    ),
+                    container,  
                   ],
                 ),
               ),
