@@ -1,10 +1,13 @@
 
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({
-    Key key,
-  }) : super(key: key);
+Function ontap;
+CustomAppBar({
+  this.ontap,
+});
+
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +16,9 @@ class CustomAppBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          CustomIconBtn(customIcon: Icons.menu),
+          GestureDetector(
+            onTap: ontap,
+            child: CustomIconBtn(customIcon: Icons.menu)),
           CustomIconBtn(customIcon: Icons.search),
         ],
       ),

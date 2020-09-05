@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:trailapp/Screens/Homepage/widgets/CustomAppBar.dart';
 import 'package:trailapp/Screens/Showall/showalldetails.dart';
+import 'package:trailapp/Screens/form/formpage.dart';
 import 'package:trailapp/Theme/theme.dart';
 import 'package:trailapp/models/homeDataModels.dart';
 
@@ -11,6 +12,8 @@ class Homepage extends StatelessWidget {
   void onPressedEvent (BuildContext context) {
     Navigator.of(context).pushNamed('/showalldetails');
   }
+
+  final GlobalKey _scaffoldKey = new GlobalKey();
 
   List<HomeDataModel> houseData = [
     HomeDataModel(
@@ -49,8 +52,21 @@ class Homepage extends StatelessWidget {
                       ),
                     );
     return Scaffold(
+      key: _scaffoldKey,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(),
+      appBar: AppBar(),
+      drawer: Drawer(
+        child: ListView(children: [
+          ListTile(
+            title: Text("Form"),
+            onTap: () {
+              Navigator.of(context).pushNamed(FormPage.routeName);
+            },
+            
+          )
+        ], )
+        ),
           body: SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal:20),
